@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Digital Identity Guidelines (NIST-800-63-4) Comments</title>
+    <title>Digital Identity Guidelines (NIST-800-63) Comments</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -18,7 +18,7 @@
         shortName: "nist-dig-comments",
 
         // subtitle
-        subtitle: "CCG Response to Digital Identity Guidelines (NIST-800-63-4) Request for Comments",
+        subtitle: "CCG Response to Digital Identity Guidelines (NIST-800-63) Request for Comments",
 
         // if you wish the publication date to be other than today, set this
         // publishDate:  "2009-08-06",
@@ -110,7 +110,37 @@ This document contains...
 <section>
 <h1>Comments</h1>
 <p>
-Lorem ipsum....
+<b>For Document 800-63A:
+Section 8.1.1 Social Security Numbers</b>
+  <p>
+
+"...Overreliance on the SSN can contribute to misuse and place the applicant at risk of harm, such as through identity theft. Nonetheless, ...."
+  </p>
+  <b>
+W3C CCG Group Comments:
+  </b> 
+  <p>
+For some use cases, when Privacy concern is high, one time use of DID identifier or the hash of the identifier can be used as a unique alternative identifier to the SSN. For further privacy, the pairwise DID identifier can be used. The DID identifier is meaningless by itself, but globally unique;it does not leak PII or any sensitive data. Public exposure of the DID identifier does not allow for it to be used as an authenticator or shared secret without a digital signature and DID Auth process. Verifiable Confidential and DID document can be constructed using context property to allow use the same DID identifier within same context. For example, for any government service, under user’s consent, the same DID identifier can be used across systems, agencies and organizations without compromising its security and privacy properties.
+
+As reference, we would like to refer to the following two items:
+
+1)DHS RFP: Preventing Forgery & Counterfeiting of Certificates and Licenses (Release 2) SVIP OTS Call 70RSAT19R0000002/0001
+Scenario I: Alternative Identifier to the Social Security number.
+This RFP is seeking alternative identifier to SSN.
+
+2)In the “ Note for Reviewer” NIST is also particularly interested in comments and recommendations for the following topic: “Privacy enhancements and considerations for identity proofing, authentication, and federation, including new developments in techniques to limit linkability and observability for federation”
+  </p>
+  <b>
+ For 800-63 B
+Section 9.3: Use Limitation </b>
+<p>
+"...CSPs may have various business purposes for processing attributes, including providing non-identity services to subscribers. However, processing attributes for other purposes than those specified at collection can create privacy risks when individuals are not expecting or comfortable with the additional processing. CSPs can determine appropriate measures commensurate with the privacy risk arising from the additional processing. For example, absent applicable law, regulation or policy, it may not be necessary to get consent when processing attributes to provide non-identity services requested by subscribers, although notices may help subscribers maintain reliable assumptions about the processing (predictability). Other processing of attributes may carry different privacy risks that call for obtaining consent or allowing subscribers more control over the use or disclosure of specific attributes (manageability). Subscriber consent needs to be meaningful; therefore, as stated in Section 4.4, when CSPs use consent measures, acceptance by the subscriber of additional uses SHALL NOT be a condition of providing authentication services."
+    </p>
+    <P>
+      <b>W3C CCG comments：</b>
+
+In some use cases, Selective Disclosure and Zero-Knowledge Proof in Verifiable Claim can be leveraged when individuals are not expecting or comfortable with the additional processing of identity attributes.
+      </p>
 </p>
 </section>
 
