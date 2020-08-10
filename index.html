@@ -84,7 +84,12 @@
   <body>
     <section id='abstract'>
       <p>
-This document serves as...
+      This document serves as a collection of the W3C Credentials Community
+      Group responses to Digital Identity Guidelines (NIST-800-63) Request for
+      Comments. Please note that this is <i>not</i> an official W3C position,
+      but the compendium of feedback from the Credentials Community Group,
+      which is a group consisting of W3C members, W3C working group
+      participants, industry, and the general public.
       </p>
     </section>
 
@@ -102,58 +107,191 @@ send them to
 
 <section>
 <h1>Introduction</h1>
-<p>
-This document contains...
-</p>
+<p>This collection of comments is by no means comprehensive, but represents
+select perspectives from the community that we hope NIST will consider in its
+Digital Identity Guidelines. Many of the comments are synthesized from the
+artifacts and comments in the following GitHub issue thread:</p>
+<a href="https://github.com/w3c-ccg/community/issues/145">https://github.com/w3c-ccg/community/issues/145</a>
 </section>
 
 <section>
-<h1>Comments</h1>
-<p>
-<b>For Document 800-63A:
-Section 8.1.1 Social Security Numbers</b>
-  <p>
+<h1>Comments by Topic in "Note to Reviewers"</h1>
+<p><b>Privacy enhancements and considerations for identity proofing, authentication,
+and federation, including new developments in techniques to limit linkability
+and observability for federation.</b></p>
+<ul>
+  <li><a href="https://www.w3.org/TR/did-core/">Decentralized Identifiers</a>
+  have authentication required as a
+  <a href="https://www.w3.org/TR/did-use-cases/#authenticate">core DID
+  Action</a>. This means that the authentication follows the identifier instead
+  of necessarily being determined by the system, reducing the implementation
+  effort overall if there are DID Methods are appropriate for the use case.</li>
+  <li><a href="https://www.w3.org/TR/vc-data-model/">Verifiable Credentials</a>
+  can be relied upon by verifiers for authentication, and this use case enables
+  a model where a separate trusted party can perform authentication in an
+  interoperable fashion. See the example in the next section with SMS.</li>
+  <li>See the comments for Section 8.1.1 for a usage example with Social
+  Security Numbers</li>
+  <li>Recent advancements in the community using zero-knowledge proofs with
+  Verifiable Credentials have enabled selective disclosure functionality,
+  using the <a href="https://github.com/w3c-ccg/ldp-bbs2020">BBS+ and
+  Linked Data formats</a>. This has significant privacy preserving and
+  observability implications, allowing credential holders to present only
+  relevant aspects of their credentials in a cryptographically secure
+  manner.</li>
+</ul>
 
-"...Overreliance on the SSN can contribute to misuse and place the applicant at risk of harm, such as through identity theft. Nonetheless, ...."
-  </p>
-  <b>
-W3C CCG Group Comments:
-  </b> 
-  <p>
-For some use cases, when Privacy concern is high, one time use of DID identifier or the hash of the identifier can be used as a unique alternative identifier to the SSN. For further privacy, the pairwise DID identifier can be used. The DID identifier is meaningless by itself, but globally unique;it does not leak PII or any sensitive data. Public exposure of the DID identifier does not allow for it to be used as an authenticator or shared secret without a digital signature and DID Auth process. Verifiable Confidential and DID document can be constructed using context property to allow use the same DID identifier within same context. For example, for any government service, under user’s consent, the same DID identifier can be used across systems, agencies and organizations without compromising its security and privacy properties.
+<p><b>Continued use of short message service (SMS) and public switched telephone
+networks (PSTN) as restricted authentication channels for out-of-band
+authenticators.</b></p>
+<ul>
+  <li>Verifiable Credentials can assist with interoperability of existing SMS and PSTN
+  authentication channels by providing means to package attestations, such as,
+  for example, that a user can receive SMS messages at a specific phone number, in
+  a standardized web-friendly format that is cryptographically verifiable. This
+  approach enables further modularity at two critical junctures:
+    <ol>
+      <li>The issuers of these authentication data do not have to be the same
+          parties as the service being accessed; the standards imply an
+          interoperable way to package this so a single entity can securely
+          perform authentication on behalf of many others.
+      </li>
+      <li>With a generic way to package reliable authentication information,
+          we can prepare existing systems to accept non-SMS/PSTN based
+          authentication channels with minimal disruption.
+      </li>
+    </ol>
 
-As reference, we would like to refer to the following two items:
+  </li>
+  <li>We believe that Verifiable Credentials should be considered as a
+      recommended path forward to reducing switching costs into new forms of
+      digital format-based authentication with improved security profiles.
+  </li>
+  <li>Additional verification is often helpful. For example, an important case
+      in healthcare is to verify an insurance ID where the incentive is getting
+      paid. There may be a subtle difference between verification of the
+      identifier and authentication of the identity. Verifiable Credentials
+      provide means to make this distinction.</li>
+</ul>
 
-1)DHS RFP: Preventing Forgery & Counterfeiting of Certificates and Licenses (Release 2) SVIP OTS Call 70RSAT19R0000002/0001
-Scenario I: Alternative Identifier to the Social Security number.
-This RFP is seeking alternative identifier to SSN.
+<p><b>Security and performance capabilities (e.g., presentation attack
+detection/liveness testing) for biometric characteristic collection to
+support Identity Assurance Level 2 remote identity proofing in the areas of
+identity evidence verification (physical/biometric comparison) or binding of
+authenticators.</b></p>
 
-2)In the “ Note for Reviewer” NIST is also particularly interested in comments and recommendations for the following topic: “Privacy enhancements and considerations for identity proofing, authentication, and federation, including new developments in techniques to limit linkability and observability for federation”
-  </p>
-  <b>
- For 800-63 B
-Section 9.3: Use Limitation </b>
-<p>
-"...CSPs may have various business purposes for processing attributes, including providing non-identity services to subscribers. However, processing attributes for other purposes than those specified at collection can create privacy risks when individuals are not expecting or comfortable with the additional processing. CSPs can determine appropriate measures commensurate with the privacy risk arising from the additional processing. For example, absent applicable law, regulation or policy, it may not be necessary to get consent when processing attributes to provide non-identity services requested by subscribers, although notices may help subscribers maintain reliable assumptions about the processing (predictability). Other processing of attributes may carry different privacy risks that call for obtaining consent or allowing subscribers more control over the use or disclosure of specific attributes (manageability). Subscriber consent needs to be meaningful; therefore, as stated in Section 4.4, when CSPs use consent measures, acceptance by the subscriber of additional uses SHALL NOT be a condition of providing authentication services."
-    </p>
-    <P>
-      <b>W3C CCG comments：</b>
+<ul>
+  <li>The use of biometric characteristics in conjunction with Verifiable
+      Credentials and Decentralized Identifiers has not yet been fully
+      explored. It has significant user privacy concerns that must be
+      appropriately addressed prior to issuing community responses. Progress on
+      the PING Self-Review for privacy in the DID Working Group can be found
+      <a href="https://github.com/w3c/did-core/issues/291">here</a>. There is
+      currently no specific work item for biometrics and Verifiable Credentials
+      or Decentralized Identifiers at W3C CCG.</li>
+</ul>
 
-In some use cases, Selective Disclosure and Zero-Knowledge Proof in Verifiable Claim can be leveraged when individuals are not expecting or comfortable with the additional processing of identity attributes.
-      </p>
-</p>
+<p><b>Capabilities and innovative approaches for remote identity proofing to
+achieve equivalent assurance as in-person identity proofing.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+
+<p><b>Security and privacy considerations and performance metrics for the use
+of behavioral characteristics as an authentication factor.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Use of dynamic knowledge-based information for identity
+verification.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Capabilities to meet Federation Assurance Level 3 (see SP 800-63C FAQ
+C03).</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Capabilities and security considerations for verifier impersonation
+resistance (see SP 800-63B FAQ B04).</b></p>
+<ul>
+  <li>Verifiable Credentials can enable a way for verifiers to authenticate
+      themselves to a credential holders prior to presentation.</li>
+  <li>Decentralized Identifiers with the appropriate authentication flows
+      can allow credential holders to establish authenticity of the
+      verifier.</li>
+</ul>
+
+<p><b>Additional controls and mitigation to address the ongoing evolution of
+threats such as phishing and automated attacks.</b></p>
+<ul>
+    <li>The DIDComm messaging protocol is being designed with consideration of
+        ways to mitigate automated attacks by increasing the cost of attack,
+        such as in 
+        <a href="https://github.com/decentralized-identity/didcomm-messaging/issues/66">this issue thread</a>. 
+        We believe it should be considered as a tool to address phishing and
+        automated attacks.</li>
+</ul>
+
 </section>
 
 <section>
-<h1>Section 2</h1>
-<p>
-Description 
-</p>
+<h1>Comments by Text Section</h1>
   <section>
-    <h2>Subsection</h2>
+  <h2>Document 800-63-A</h2>
     <section>
-
-      <h3>Subsubsection</h3>
+    <h3>Section 8.1.1 Social Security Numbers</h3>
+    <q>...Overreliance on the SSN can contribute to misuse and place the
+        applicant at risk of harm, such as through identity theft. Nonetheless,
+        ....</q>
+    <h4>Comments</h4> 
+    <p>For some use cases, when Privacy concern is high, one time use of
+    Decentralized Identifiers or derivative artifacts may be considered for use
+    as unique alternative identifiers to the SSN. For further privacy, the
+    pairwise DID identifiers can be used. The DID is meaningless by itself, but
+    globally unique. It has the potential to mitigate correlation risks.</p>
+    <p>Furthermore, DID-based systems should prevent DIDs from being used for
+    authentication, so the harm in public exposure is reduced. The same DID
+    has the potential to be used across systems, agencies, and organizations
+    without compromising its security and privacy properties.</p>
+    <p>We refer to the following item:</p>
+    <ol>
+      <li>DHS RFP: Preventing Forgery & Counterfeiting of Certificates and
+          Licenses (Release 2) SVIP OTS Call 70RSAT19R0000002/0001 Scenario I:
+          Alternative Identifier to the Social Security number.  This RFP is
+          seeking alternative identifier to SSN.</li>
+    </ol>
+    </section>
+  </section>
+  <section>
+  <h2>Document 800-63-B</h2>
+    <section>
+    <h3>Section 9.3: Use Limitation</h3>
+      <q>...CSPs may have various business purposes for processing
+      attributes, including providing non-identity services to subscribers.
+      However, processing attributes for other purposes than those specified at
+      collection can create privacy risks when individuals are not expecting or
+      comfortable with the additional processing. CSPs can determine
+      appropriate measures commensurate with the privacy risk arising from the
+      additional processing. For example, absent applicable law, regulation or
+      policy, it may not be necessary to get consent when processing attributes
+      to provide non-identity services requested by subscribers, although
+      notices may help subscribers maintain reliable assumptions about the
+      processing (predictability). Other processing of attributes may carry
+      different privacy risks that call for obtaining consent or allowing
+      subscribers more control over the use or disclosure of specific
+      attributes (manageability). Subscriber consent needs to be meaningful;
+      therefore, as stated in Section 4.4, when CSPs use consent measures,
+      acceptance by the subscriber of additional uses SHALL NOT be a condition
+      of providing authentication services.</q>
+      <h4>Comments</h4>
+      <p> In some use cases, Selective Disclosure and Zero-Knowledge Proofs
+      with Verifiable Credentials can be leveraged when individuals wish to
+      utilize information minimization.</p>
     </section>
   </section>
 </section>
