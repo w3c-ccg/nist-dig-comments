@@ -45,6 +45,8 @@
         editors: [
           { name: "Wayne Chang", url: "https://www.linkedin.com/in/waynebuilds/",
             company: "", companyURL: "" },
+          { name: "Emily Fry", url: "https://www.linkedin.com/in/emily-fry-03a60b97/",
+            company: "", companyURL: "" },
           { name: "Nader Helmy", url: "https://www.linkedin.com/in/naderhelmy/",
             company: "", companyURL: ""},
           { name: "Ken Huang", url: "https://www.linkedin.com/in/kenhuang8/",
@@ -84,7 +86,12 @@
   <body>
     <section id='abstract'>
       <p>
-This document serves as...
+      This document serves as a collection of the W3C Credentials Community
+      Group responses to Digital Identity Guidelines (NIST-800-63) Request for
+      Comments. Please note that this is <i>not</i> an official W3C position,
+      but the compendium of feedback from the Credentials Community Group,
+      which is a group consisting of W3C members, W3C working group
+      participants, industry, and the general public.
       </p>
     </section>
 
@@ -102,58 +109,381 @@ send them to
 
 <section>
 <h1>Introduction</h1>
-<p>
-This document contains...
-</p>
+<p>This collection of comments is by no means comprehensive, but represents
+select perspectives from the community that we hope NIST will consider in its
+Digital Identity Guidelines. Many of the comments are synthesized from the
+artifacts and comments in the following GitHub issue thread:</p>
+<a href="https://github.com/w3c-ccg/community/issues/145">https://github.com/w3c-ccg/community/issues/145</a>
+
+<p>Most of all, these comments are meant to begin dialog and discussion with
+respect to the NIST Digital Identity Guidelines. They are not meant to be a
+final and definitive community stance, but an opportunity to begin engagement
+with government technologists and state-sponsored standards developing
+organizations including NIST and its affiliates.</p>
 </section>
 
 <section>
-<h1>Comments</h1>
-<p>
-<b>For Document 800-63A:
-Section 8.1.1 Social Security Numbers</b>
-  <p>
+<h1>Comments by Topic in "Note to Reviewers"</h1>
+<p><b>Privacy enhancements and considerations for identity proofing, authentication,
+and federation, including new developments in techniques to limit linkability
+and observability for federation.</b></p>
+<ul>
+  <li><a href="https://www.w3.org/TR/did-core/">Decentralized Identifiers</a>
+  have authentication required as a
+  <a href="https://www.w3.org/TR/did-use-cases/#authenticate">core DID
+  Action</a>. This means that the authentication follows the identifier instead
+  of necessarily being determined by the system, reducing the implementation
+  effort overall if there are DID Methods are appropriate for the use case.</li>
+  <li><a href="https://www.w3.org/TR/vc-data-model/">Verifiable Credentials</a>
+  can be relied upon by verifiers for authentication, and this use case enables
+  a model where a separate trusted party can perform authentication in an
+  interoperable fashion. See the example in the next section with SMS.</li>
+  <li>See the comments for Section 8.1.1 for a usage example with Social
+  Security Numbers</li>
+  <li>Recent advancements in the community using zero-knowledge proofs with
+  Verifiable Credentials have enabled selective disclosure functionality,
+  using the <a href="https://github.com/w3c-ccg/ldp-bbs2020">BBS+ and
+  Linked Data formats</a>. This has significant privacy preserving and
+  observability implications, allowing credential holders to present only
+  relevant aspects of their credentials in a cryptographically secure
+  manner.</li>
+</ul>
 
-"...Overreliance on the SSN can contribute to misuse and place the applicant at risk of harm, such as through identity theft. Nonetheless, ...."
-  </p>
-  <b>
-W3C CCG Group Comments:
-  </b> 
-  <p>
-For some use cases, when Privacy concern is high, one time use of DID identifier or the hash of the identifier can be used as a unique alternative identifier to the SSN. For further privacy, the pairwise DID identifier can be used. The DID identifier is meaningless by itself, but globally unique;it does not leak PII or any sensitive data. Public exposure of the DID identifier does not allow for it to be used as an authenticator or shared secret without a digital signature and DID Auth process. Verifiable Confidential and DID document can be constructed using context property to allow use the same DID identifier within same context. For example, for any government service, under user’s consent, the same DID identifier can be used across systems, agencies and organizations without compromising its security and privacy properties.
+<p><b>Continued use of short message service (SMS) and public switched telephone
+networks (PSTN) as restricted authentication channels for out-of-band
+authenticators.</b></p>
+<ul>
+  <li>Verifiable Credentials can assist with interoperability of existing SMS and PSTN
+  authentication channels by providing means to package attestations, such as,
+  for example, that a user can receive SMS messages at a specific phone number, in
+  a standardized web-friendly format that is cryptographically verifiable. This
+  approach enables further modularity at two critical junctures:
+    <ol>
+      <li>The issuers of these authentication data do not have to be the same
+          parties as the service being accessed; the standards imply an
+          interoperable way to package this so a single entity can securely
+          perform authentication on behalf of many others.
+      </li>
+      <li>With a generic way to package reliable authentication information,
+          we can prepare existing systems to accept non-SMS/PSTN based
+          authentication channels with minimal disruption.
+      </li>
+    </ol>
 
-As reference, we would like to refer to the following two items:
+  </li>
+  <li>We believe that Verifiable Credentials should be considered as a
+      recommended path forward to reducing switching costs into new forms of
+      digital format-based authentication with improved security profiles.
+  </li>
+  <li>Additional verification is often helpful. For example, an important case
+      in healthcare is to verify an insurance ID where the incentive is getting
+      paid. There may be a subtle difference between verification of the
+      identifier and authentication of the identity. Verifiable Credentials
+      provide means to make this distinction.</li>
+</ul>
 
-1)DHS RFP: Preventing Forgery & Counterfeiting of Certificates and Licenses (Release 2) SVIP OTS Call 70RSAT19R0000002/0001
-Scenario I: Alternative Identifier to the Social Security number.
-This RFP is seeking alternative identifier to SSN.
+<p><b>Security and performance capabilities (e.g., presentation attack
+detection/liveness testing) for biometric characteristic collection to
+support Identity Assurance Level 2 remote identity proofing in the areas of
+identity evidence verification (physical/biometric comparison) or binding of
+authenticators.</b></p>
 
-2)In the “ Note for Reviewer” NIST is also particularly interested in comments and recommendations for the following topic: “Privacy enhancements and considerations for identity proofing, authentication, and federation, including new developments in techniques to limit linkability and observability for federation”
-  </p>
-  <b>
- For 800-63 B
-Section 9.3: Use Limitation </b>
-<p>
-"...CSPs may have various business purposes for processing attributes, including providing non-identity services to subscribers. However, processing attributes for other purposes than those specified at collection can create privacy risks when individuals are not expecting or comfortable with the additional processing. CSPs can determine appropriate measures commensurate with the privacy risk arising from the additional processing. For example, absent applicable law, regulation or policy, it may not be necessary to get consent when processing attributes to provide non-identity services requested by subscribers, although notices may help subscribers maintain reliable assumptions about the processing (predictability). Other processing of attributes may carry different privacy risks that call for obtaining consent or allowing subscribers more control over the use or disclosure of specific attributes (manageability). Subscriber consent needs to be meaningful; therefore, as stated in Section 4.4, when CSPs use consent measures, acceptance by the subscriber of additional uses SHALL NOT be a condition of providing authentication services."
-    </p>
-    <P>
-      <b>W3C CCG comments：</b>
+<ul>
+  <li>The use of biometric characteristics in conjunction with Verifiable
+      Credentials and Decentralized Identifiers has not yet been fully
+      explored. It has significant user privacy concerns that must be
+      appropriately addressed prior to issuing community responses. Progress on
+      the PING Self-Review for privacy in the DID Working Group can be found
+      <a href="https://github.com/w3c/did-core/issues/291">here</a>. There is
+      currently no specific work item for biometrics and Verifiable Credentials
+      or Decentralized Identifiers at W3C CCG.</li>
+  <li>Elsewhere in the decentralized identity community, during Rebooting Web
+      of Trust 6, community members have created
+      <a href="https://github.com/WebOfTrustInfo/rwot6-santabarbara/blob/master/draft-documents/Biometrics.md">a draft of their approach to biometrics</a>.</li>
+</ul>
 
-In some use cases, Selective Disclosure and Zero-Knowledge Proof in Verifiable Claim can be leveraged when individuals are not expecting or comfortable with the additional processing of identity attributes.
-      </p>
-</p>
+<p><b>Capabilities and innovative approaches for remote identity proofing to
+achieve equivalent assurance as in-person identity proofing.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+
+<p><b>Security and privacy considerations and performance metrics for the use
+of behavioral characteristics as an authentication factor.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Use of dynamic knowledge-based information for identity
+verification.</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Capabilities to meet Federation Assurance Level 3 (see SP 800-63C FAQ
+C03).</b></p>
+<ul>
+  <li>No comments at this time.</li>
+</ul>
+
+<p><b>Capabilities and security considerations for verifier impersonation
+resistance (see SP 800-63B FAQ B04).</b></p>
+<ul>
+  <li>Verifiable Credentials can enable a way for verifiers to authenticate
+      themselves to a credential holders prior to presentation.</li>
+  <li>Decentralized Identifiers with the appropriate authentication flows
+      can allow credential holders to establish authenticity of the
+      verifier.</li>
+</ul>
+
+<p><b>Additional controls and mitigation to address the ongoing evolution of
+threats such as phishing and automated attacks.</b></p>
+<ul>
+    <li>The DIDComm messaging protocol is being designed with consideration of
+        ways to mitigate automated attacks by increasing the cost of attack,
+        such as in 
+        <a href="https://github.com/decentralized-identity/didcomm-messaging/issues/66">this issue thread</a>. 
+        We believe it should be considered as a tool to address phishing and
+        automated attacks.</li>
+</ul>
+
 </section>
 
 <section>
-<h1>Section 2</h1>
-<p>
-Description 
-</p>
+<h1>Comments by Document</h1>
   <section>
-    <h2>Subsection</h2>
+  <h2>Document 800-63-3: Digital Identity Guidelines</h2>
     <section>
+    <h3>General Comments</h3>
+    <ul>
+      <li>The rules should clarify how the guidelines interface with trust
+          frameworks that develop (for example, in a particular industry or
+          domain and which some government agencies may wish to be apart),
+          particularly in light of the increasing interaction between public and
+          private sector.</li>
+      <li>The guidelines could address issues regarding a relying party’s right
+          to rely. This might include, for example, a relying party’s right to
+          rely on an identity credential generally or rely on credentials
+          issued under a certain trust framework.</li>
+      <li>NIST could ensure that the rules do not discriminate among IdM system
+          models by including the concept of IdM system neutrality. Because (as
+          the current version recognises at the beginning) there are many
+          different ways of conducting online identity transactions (e.g., single
+          identity provider (IdP) systems, federated (multiple IdP) systems, user
+          controlled/user centric systems/self-sovereign systems, hub systems,
+          DLT systems, etc.), it is important that the rules do not require or
+          assume a particular approach to the identification and/or
+          authentication processes, or the system that delivers them. The
+          guidelines should consider ways to ensure that Rules do not (regardless
+          of the introductory disclaimers made) imply and/or require a certain
+          system model.</li>
+      <li>The Rules do not comment on standard allocation of liability. This is
+          likely deliberate – eg. due to the public sector focus of the rules, or
+          diversity of IdM systems such that it would be inappropriate to impose
+          a one-size-fits-all approach. However, liability may be addressed in
+          trust frameworks. In many cases, private sector digital identity
+          participants rely on attribute assertions from third parties, such as
+          national IdM systems or other government databases (e.g., DMV). Since
+          government IdM systems are often viewed as authoritative, they will not
+          typically accept any liability for errors.  Therefore determining who
+          bears the loss in the case of errors in government supplied information
+          is vital. The rules should address ways in which these obligations and
+          liability allocation might be appropriately resolved.
+      </li>
+      <li>The NIST Guidelines could set out a process for certifying Trust
+          Framework bodies for certain use-cases/communities which meet NIST
+          guidelines.</li>
+      <li>(Abstract) “These guidelines provide technical requirements for
+        federal agencies implementing digital identity services and are not
+        intended to constrain the development or use of standards outside of
+        this purpose.” – As above, federal agencies are likely to increasingly
+        interact with a more diverse identity eco-system moving forwards which
+        will include customers who have been issued and wish to reuse identity
+        credentials issued by non-federal agencies. The guidelines should
+        address this reality and take into account models other than the
+        federated approach.</li>
+    </ul>
+    </section>
 
-      <h3>Subsubsection</h3>
+    <section>
+    <h3>Comments by Section</h3>
+    <b>Section 2</b>
+    <q>This recommendation also provides guidelines for credential service providers (CSPs), verifiers, and relying parties (RPs)</q>
+    <p>The framing throughout the rules (for example, the roles) fits/assumes
+    the traditional IdM system model. IdM system models are undergoing a
+    variety of changes and experimentation, raising concerns that using this
+    list of obligations is based on an old model, that may not fit newer IdM
+    systems and/or may unduly inhibit further experimentation.</p>
+
+    <b>Section 4.1</b>
+    <q>The digital identity model used in these guidelines reflects
+    technologies and architectures currently available in the market</q>
+    <p>Some SSI technologies are in market – are the guidelines intended to
+    cover SSI technologies?</p>
+
+    <q>When a claimant successfully demonstrates possession and control of one
+      or more authenticators to a verifier through an authentication protocol,
+      the verifier can verify that the claimant is a valid subscriber. The
+      verifier passes on an assertion about the subscriber, who maybe either
+      pseudonymous or non-pseudonymous, to the RP</q>
+    <p>In SSI, the role of the verifier is not required – or rather it is
+    replaced by digital wallet component that acts on behalf of the
+    subject.</p>
+
+    <b>Section 4.1 Figure 4-1</b>
+    <p>This is only one type of digital identity model – it is not
+    representative of non-federated models.</p>
+
+    <b>Section 4.3.2</b>
+    <q>A credential is stored and maintained by the CSP, though the claimant
+      may possess it</q>
+    <p>Why isn’t the credential is stored where the user chooses – eg in the
+    user’s digital wallet and backed up.</p>
+
+    <b>Section 4.4</b>
+    <q>Overall, SP 800-63 does not presuppose a federated identity
+    architecture</q>
+    <p>The roles depicted and language used do predicate a federated model. It
+    would be difficult to adopt an SSI model AND adhere to the NIST digital
+    identity guidelines.</p>
+    <p>The section sets out the benefits of a federated architecture over a
+    siloed one, but there is no reference to or comparison to a decentralised
+    model.</p>
+
+    <b>Section 4.4.1 Assertions</b>
+    <q>An RP trusts an assertion based on the source, the time of creation, how
+      long the assertion is valid from time of creation, and the corresponding
+      trust framework that governs the policies and processes of CSPs and RPs.
+    </q>
+    <p>NIST could clarify how trust frameworks interface with these guidelines.
+    </p>
+    
+    <q>Examples of assertions include: (SAML, OIDC, Kerberos tickets)</q>
+    <p>Verifiable credentials can also be containers for assertions.</p>
+
+    <b>Table 5.3 Federation Assurance Levels</b>
+    <q>FAL1: permits the RP to receive a bearer assertion from an identity
+       provider (IdP). The IdP must sign the assertion using approved
+       cryptography.</q>
+    <p>Can the digital wallet be the IdP in this context?</p>
+
+    <b>Section 6.1</b>
+    <q>...more information on whether an agency can federate is provided in
+    section 7</q>
+    <p>What about more information on self-federation?</p>
+
+    </section>
+  </section>
+  <section>
+  <h2>Document 800-63-A: Enrollment and Identity Proofing</h2>
+    <section>
+    <h3>General Comments</h3>
+    <ul>
+      <li>No comments at this time.</li>
+    </ul>
+    </section>
+
+    <section>
+    <h3>Comments by Section</h3>
+    <b>Section 4.1 Process Flow</b>
+    <q>The CSP validates the information by checking an authoritative source</q>
+    <p>What if the information an  applicant receives from the authoritative
+    source is already signed by them? Eg. in SSI where a credential is
+    cryptographically signed by the issuer and does not need to be validated by
+    a CSP for a relying party to rely on it.</p>
+
+    <b>Section 4.4 Identity Assurance Level 2</b>
+    <p>The framing assumes that a CSP is present, when this role is not always
+    necessary – eg. if the individual has their credentials issued to them
+    directly by the issuer, they can present these to a relying party without
+    the need for a CSP to be involved.  </p>
+
+    <b>Section 4.4.1.6 Address Confirmation</b>
+    <p>If a utilities company provided a proof of address credentials (eg.
+    because internet was connected at the address and paid for by the
+    applicant), would this be an acceptable form of address confirmation?</p>
+
+    <b>Section 5.3.2</b>
+    <p>Large focus on Knowledge Based Verification requirements – what about
+    guidelines for “something you have”?</p>
+
+    <b>Section 8.1.1 Social Security Numbers</b>
+    <q>...Overreliance on the SSN can contribute to misuse and place the
+        applicant at risk of harm, such as through identity theft. Nonetheless,
+        ....</q>
+    <p>For some use cases, when Privacy concern is high, one time use of
+    Decentralized Identifiers or derivative artifacts may be considered for use
+    as unique alternative identifiers to the SSN. For further privacy, the
+    pairwise DID identifiers can be used. The DID is meaningless by itself, but
+    globally unique. It has the potential to mitigate correlation risks.</p>
+    <p>Furthermore, DID-based systems should prevent DIDs from being used for
+    authentication, so the harm in public exposure is reduced. The same DID
+    has the potential to be used across systems, agencies, and organizations
+    without compromising its security and privacy properties.</p>
+    <p>We refer to the following item:</p>
+    <ol>
+      <li>DHS RFP: Preventing Forgery & Counterfeiting of Certificates and
+          Licenses (Release 2) SVIP OTS Call 70RSAT19R0000002/0001 Scenario I:
+          Alternative Identifier to the Social Security number.  This RFP is
+          seeking alternative identifier to SSN.</li>
+    </ol>
+    </section>
+  </section>
+  <section>
+  <h2>Document 800-63-B: Authentication and Lifecycle Management</h2>
+    <section>
+    <h3>General Comments</h3>
+    <ul>
+      <li>We prioritize the idea of authentication based on something you have
+        rather than something you know</li>
+      <li>Innovations in DID, especially ephemeral DIDs, would add
+        privacy-preserving properties.</li>
+    </ul>
+    </section>
+
+    <section>
+    <h3>Comments by Section</h3>
+    <b>Section 9.3 Use Limitation</b>
+    <q>...CSPs may have various business purposes for processing
+    attributes, including providing non-identity services to subscribers.
+    However, processing attributes for other purposes than those specified at
+    collection can create privacy risks when individuals are not expecting or
+    comfortable with the additional processing.</q>
+    <p>In some use cases, Selective Disclosure and Zero-Knowledge Proofs with
+    Verifiable Credentials can be leveraged when individuals wish to utilize
+    information minimization.</p>
+    </section>
+  </section>
+  <section>
+  <h2>Document 800-63-C: Federation and Assertions</h2>
+    <section>
+    <h3>General Comments</h3>
+    <ul>
+      <li>The guidelines refer to the IdP – the guidelines should clarify
+        whether an SSI based mobile wallet could be the ‘IdP’ or ‘federator’ in
+        this context.</li>
+      <li>Could consider including a new mechanism for federation that is based
+        on SSI or decentralized technology</li>
+    </ul>
+    </section>
+
+    <section>
+    <h3>Comments by Section</h3>
+    <b>Figure 5</b>
+    <p>Figure 5 talks about federation as a three party relationship which
+    includes an IdP – again, the guidelines should clarify the terminology on
+    what amounts to an IdP and whether this could be a digital wallet/software
+    agent acting on behalf of the user.</p>
+    <b>5.1</b>
+    <p>Assumes a centralized approach, could benefit from a web of trust
+    federation model?</p>
+    <ul>
+      <li>Enterprise consortia, NIST Blockchain Taxonomy Guide, EEA, ERC725</li>
+      <li>DIF and OpenID collaboration on SIOP-related issues</li>
+      <li>Digital Credentials Consortium</li>
+      <li>eSSIF / EBSI</li>
+    </ul>
     </section>
   </section>
 </section>
